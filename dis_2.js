@@ -4,4 +4,17 @@ const output=document.getElementById("output");
 
 async function getData(){
     const res = await fetch(BIN_URL,
-        {head
+        {headers: {"X-Master_Key": API_KEY}}
+    );
+
+    const data = await res.json();
+
+    const singleAffiliate=data.record.affiliates.map(
+        a =>
+            `
+                <li>
+                    ${a.fName} ${a.lName} (${a.isStudent ? "Student" : "Not Student"})
+                </li>
+            `
+    );
+}
